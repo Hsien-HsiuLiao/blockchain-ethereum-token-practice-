@@ -50,3 +50,35 @@ contract Token is ERCToken {
   uint256 public totalSupply;
   
 }
+
+contract ENLT is Token {
+
+    function () {
+        //if ether is sent to this address, send it back.
+        throw;
+    }
+    
+    string public name;
+    uint8 public decimals;
+    string public symbol;
+    
+    function ENLT( // should have the same name as the contract name
+        ) {
+        balances[msg.sender] = 1000;    // creator gets all initial tokens
+        totalSupply = 1000;             // total supply of token
+        name = "Enlight";               // name of token
+        decimals = 0;                   // amount of decimals
+        symbol = "ENLT";                // symbol of token
+    }
+    
+    /* Approves and then calls the receiving contract */
+    function approveAndCall(address _spender, uint256 _value, bytes _extraData) returns (bool success) {
+        allowed[msg.sender][_spender] = _value;
+        Approval(msg.sender, _spender, _value);
+        
+        if(!_spender.call(bytes4(bytes32(sha3("receiveApproval(address, uint256, address, bytes)"))), msg.sender, _value, this, _extraData)) { throw; }
+        return true;
+    }
+}    
+      
+    
