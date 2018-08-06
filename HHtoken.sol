@@ -19,3 +19,11 @@ contract ERC20Token {
   event Transfer(address indexed _from, address indexed _to, uint256 _value);
   event Approval(address indexed _owner, address indexed _spender, uint _value);
 }
+
+contract Token is ERCToken {
+
+  mapping (address => uint256) balances;
+  mapping (address => mapping (address => uint256)) allowed;
+  uint256 public totalSupply;
+  
+}
