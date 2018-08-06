@@ -29,9 +29,15 @@ contract ERC20Token {
       } else { return false; }
   }
   
-  function approve(address _spender, uint256 _value)returns (bool sucess) {}
+  function approve(address _spender, uint256 _value)returns (bool sucess) {
+          allowed[msg.sender][_spender] = _value;
+          Approval(msg.sender, _spender, _value);
+          retrurn true;
+  }
   
-  function allowance(address _owner, address _spender) constant returns (uint256 remaining) {}
+  function allowance(address _owner, address _spender) constant returns (uint256 remaining) {
+          return allowed[_owner][_spender];
+  } //end of Token contract
   
   event Transfer(address indexed _from, address indexed _to, uint256 _value);
   event Approval(address indexed _owner, address indexed _spender, uint _value);
