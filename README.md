@@ -1,2 +1,3 @@
 # 
-ERC20Token practice from  https://enlight.nyc/ethereum
+ERC20Token practice from  
+https://enlight.nyc/projects/ethereum-token/
